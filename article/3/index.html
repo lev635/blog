@@ -5,6 +5,7 @@
     <link rel="icon" href="../../assets/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type=text/css href="../css/style.css" />
     <link rel="stylesheet" type=text/css href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/vs2015.css">
     <title>ゆかりの部屋</title>
 </head>
 
@@ -13,9 +14,9 @@
 <body>
     <div class="article">
         <h1 class="title">記事一覧ページの作成</h1>
-        <!-- <p class="title">最終更新: <time id="last_modified"></time></p> -->
+        <p class="title">2024-10-18</p>
         <h2>概要</h2>
-        <a href="https://lev635.github.io/blog/article/0/">記事一覧</a>を作成した。
+        <a href="../0/">記事一覧</a>を作成した。
         作成までに試行錯誤があったため、その一部始終を書く。
 
         <h2>作成までの流れ</h2>
@@ -23,7 +24,7 @@
         <p>
             このブログのディレクトリ構造は以下のようになっている。
         </p>
-        <pre><code>
+        <pre><code class="nohighlight">
 blog
  ├─article
  │  ├─0
@@ -61,7 +62,7 @@ blog
         </p>
         <h3 class="enum">直書きの自動化</h3>
         <p>
-            記事の情報をHTMLに直書きする工程を自動化すれば幾分か楽になる。Pythonで実装した。デプロイ
+            記事の情報をHTMLに直書きする工程を自動化すれば幾分か楽になる。Pythonで実装した。
         </p>
         <pre><code>
 import os
@@ -108,6 +109,7 @@ file.close()
 
 <div id="footer"></div>
 
+<script src = "../js/highlight.min.js"></script>
 <script src="../js/script.js"></script>
 <script src="js/script.js"></script>
 

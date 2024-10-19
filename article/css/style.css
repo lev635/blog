@@ -20,7 +20,6 @@ p {
     margin: 10px;
 }
 
-
 a#title {
     text-decoration: none;
     color: #000000;
@@ -34,14 +33,30 @@ code {
         "Hiragino Kaku Gothic ProN",
         Meiryo,
         monospace;
-    margin: 20px auto;
+    margin: 10px auto;
     width: 100%;
     box-sizing: border-box;
-    padding: 10px 50px;
+    padding: 3px 16px;
     border-radius: 10px;
-    background-color: #313131;
-    color: #ffffff;
-    overflow-x: scroll
+    overflow-x: auto
+}
+
+code.nohighlight {
+    display: inline-block;
+    font-family:
+        Menlo,
+        Consolas,
+        "Hiragino Kaku Gothic ProN",
+        Meiryo,
+        monospace;
+    margin: 10px auto;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 3px 16px;
+    border-radius: 10px;
+    background: #1e1e1e;
+    color: #dcdcdc;
+    overflow-x: auto
 }
 
 .url {
