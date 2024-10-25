@@ -81,7 +81,7 @@ header {
     text-align: center;
 }
 
-.article {
+article {
     background-color: #ffffff;
     margin: 20px auto;
     max-width: 800px;
