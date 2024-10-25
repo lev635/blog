@@ -1,2 +1,2 @@
 #!/bin/sh
-echo 'hello pre-push'
+python program/makeindex.py
