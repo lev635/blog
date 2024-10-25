@@ -101,7 +101,7 @@ footer .sns_icon {
     text-align: center;
 }
 
-.article {
+article {
     counter-reset: a;
 }
 
