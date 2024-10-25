@@ -20,12 +20,13 @@
     <div id="header"></div>
     <article>
         <h1 class="title">記事一覧ページの作成</h1>
-        <p class="title">2024-10-18</p>
+        <div class="title">2024-10-18</div>
         <hr>
         <h2>概要</h2>
-        <a href="../0/">記事一覧</a>を作成した。
-        作成までに試行錯誤があったため、その一部始終を書く。
-
+        <p>
+            <a href="../0/">記事一覧</a>を作成した。
+            作成までに試行錯誤があったため、その一部始終を書く。
+        </p>
         <h2>作成までの流れ</h2>
         <h3 class="enum">Javascriptによる自動生成</h3>
         <p>
@@ -98,7 +99,8 @@ file.close()
         </code></pre>
         <p>
             <span class="url">article</span>以下を検索する。最新の記事が上に表示されて欲しいので順序を入れ替える。
-            記事のタイトルは<span class="url">&lt;h1 class=&quot;title&quot;&gt;</span>と<span class="url">&lt;/h1&gt;</span>に挟まれているため、そこから抽出する。
+            記事のタイトルは<span class="url">&lt;h1 class=&quot;title&quot;&gt;</span>と<span
+                class="url">&lt;/h1&gt;</span>に挟まれているため、そこから抽出する。
             記事のURLはディレクトリの名前から直接得られる。
         </p>
         <p>
@@ -116,7 +118,7 @@ file.close()
 </body>
 
 
-<script src = "../js/highlight.min.js"></script>
+<script src="../js/highlight.min.js"></script>
 <script src="../js/script.js"></script>
 <script src="js/script.js"></script>
 
