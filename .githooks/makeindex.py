@@ -17,7 +17,7 @@ for dir in files:
     end = content.find('</h1>')
     title = content[start+18:end]
     
-    file.write(f"<li><a href=../{idx}><b>{title}</b></a></li>\n")
+    file.write(f"<li><a href=../{idx}><b>{title}</b></a>a</li>\n")
 
 file.write("</ul>")
 file.close()
