@@ -1,4 +1,4 @@
 #!/bin/sh
 
-result = $(python3 ./.githooks/makeindex2.py)
+result = $(python ./.githooks/makeindex2.py)
 echo $result
