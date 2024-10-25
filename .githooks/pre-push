@@ -1,2 +1,2 @@
 #!/bin/sh
-python ./.githooks/makeindex.py
+python ./.githooks/makeindex2.py
