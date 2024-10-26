@@ -97,7 +97,13 @@ footer .sns_icon {
     margin: 5px;
 }
 
-.title {
+time.upload {
+    display: block;
+    text-align: center;
+}
+
+
+h1.title {
     text-align: center;
 }
 
