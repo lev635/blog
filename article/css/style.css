@@ -26,6 +26,17 @@ a#title {
 }
 
 code {
+    font-family:
+    Menlo,
+    Consolas,
+    "Hiragino Kaku Gothic ProN",
+    Meiryo,
+    monospace;
+    background-color: #f0f0f0;
+    color: #5c1f99;
+}
+
+pre > code {
     display: inline-block;
     font-family:
         Menlo,
@@ -36,12 +47,12 @@ code {
     margin: 10px auto;
     width: 100%;
     box-sizing: border-box;
-    padding: 3px 16px;
+    padding: 16px 16px;
     border-radius: 10px;
     overflow-x: auto
 }
 
-code.nohighlight {
+pre > code.nohighlight {
     display: inline-block;
     font-family:
         Menlo,
@@ -57,18 +68,6 @@ code.nohighlight {
     background: #1e1e1e;
     color: #dcdcdc;
     overflow-x: auto
-}
-
-.url {
-    font-family:
-        Menlo,
-        Consolas,
-        "Hiragino Kaku Gothic ProN",
-        Meiryo,
-        monospace;
-    margin: 5px;
-    background-color: #f0f0f0;
-    color: #5c1f99;
 }
 
 
@@ -103,7 +102,7 @@ time#upload {
 }
 
 
-h1.title {
+h1#title {
     text-align: center;
 }
 

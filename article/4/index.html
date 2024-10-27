@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head prefix="og: http://ogp.me/ns#">
+    <meta property="og:title" content="Beautiful Soup を用いた OGP の設定">
+    <meta property="og:site_name" content="ゆかりの部屋">
+    <meta property="og:type" content="blog">
+    <meta property="og:description" content="HTMLの構造をBeautiful Soupで解析し、OGPを自動的に設定した。">
+    <meta property="og:url" content="https://lev635.github.io/blog/article/4">
+
+    <link rel="icon" href="../../assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type=text/css href="../css/style.css" />
+    <link rel="stylesheet" type=text/css href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/vs2015.css">
+    <title>Beautiful Soup を用いた OGP の設定 - ゆかりの部屋</title>
+</head>
+
+
+<body>
+    <div id="header"></div>
+    <article>
+        <h1 id="title">Beautiful Soup を用いた OGP の設定</h1>
+        <time datetime=2024-10-27 id="upload">2024-10-17</time>
+        <hr>
+        <h2>概要</h2>
+        <p id="about">HTMLの構造をBeautiful Soupで解析し、OGPを自動的に設定した。</p>
+        <h2>Beautiful Soup とは</h2>
+        <p>
+            Beautiful Soup とは Python のライブラリの一つで、HTML からデータを抽出するものである。
+            スクレイピングに用いられることが多い。
+        </p>
+        <h2>OGP (Open Graph Protocol)とは</h2>
+        <p>
+            webサイトが SNS 等で共有された際にその情報を表示させる仕組み。これがないとサイトを共有しても URL だけが表示される。
+        </p>
+        <h2>実装</h2>
+        <h3 class="enum">記事一覧ページ</h3>
+        <p>
+            <a href="../3">記事一覧ページの作成</a> で作成した、記事のタイトルを抽出するプログラムを Beautiful Soup で実装した。
+        </p>
+        <pre><code>import os
+
+from bs4 import BeautifulSoup
+
+# 全ての記事
+dirs_article = os.listdir(&quot;article&quot;)
+dirs_article.reverse()
+dirs_article = dirs_article[3:]
+
+# 1. 記事一覧ページの作成
+# page.html
+file_page_html = open(&quot;article/0/include/page.html&quot;, &quot;w&quot;, encoding=&quot;UTF-8&quot;)
+file_page_html.write(&quot;&lt;ul&gt;\n&quot;)
+
+for dirname in dirs_article:
+    # htmlの取得
+    file_article = open(f&quot;article/{dirname}/index.html&quot;, &quot;r&quot;, encoding=&quot;UTF-8&quot;)
+    soup_article = BeautifulSoup(file_article, &quot;html.parser&quot;)
+    file_article.close()
+    # タイトルの抽出
+    title_article = soup_article.select(&quot;h1#title&quot;)[0].get_text()
+    # 書き出し
+    file_page_html.write(f&quot;&lt;li&gt;&lt;a href=../{dirname}&gt;&lt;b&gt;{title_article}&lt;/b&gt;&lt;/a&gt;&lt;/li&gt;\n&quot;)
+    
+file_page_html.write(&quot;&lt;/ul&gt;&quot;)
+file_page_html.close()
+</code></pre>
+        <p>
+            <code>soup_article.select("h1#title")[0].get_text()</code> で CSS セレクターからタイトルを抽出している。
+            <code>str.find()</code> でタイトルの場所を特定し、文字数を数えて中身を取得するよりも簡潔。
+        </p>
+        <p>
+            タイトルを <code>page.html</code> に書き出す部分には Beautiful Soupを用いなかった。
+            Beautiful Soup には HTML を編集する機能もついているが、インデントが崩れてしまう。
+            <code>soup.prettify()</code> でインデントをつけることも可能ではあるが、
+            これは HTML を視覚的に分かりやすくするためのものらしく、意味を変えてしまうため使えない。
+        </p>
+        <h3 class="enum">OGP</h3>
+        OGP のうち、記事に応じて変えたい部分は以下の通り。
+<pre><code>&lt;head prefix=&quot;og: http://ogp.me/ns#&quot;&gt;
+    &lt;meta property=&quot;og:title&quot; content=&quot;&quot;&gt;
+    &lt;meta property=&quot;og:description&quot; content=&quot;&quot;&gt;
+    &lt;meta property=&quot;og:url&quot; content=&quot;&quot;&gt;
+&lt;/head&gt;
+</code></pre>
+        <p>
+            前項と同様に編集する。
+        </p>
+<pre><code>import os
+import re
+
+from bs4 import BeautifulSoup
+
+# 全ての記事
+dirs_article = os.listdir(&quot;article&quot;)
+dirs_article.reverse()
+dirs_article = dirs_article[3:]
+
+# 2. OGP の設定
+for dirname in dirs_article:
+    # htmlの取得
+    file_article = open(f&quot;article/{dirname}/index.html&quot;, &quot;r&quot;, encoding=&quot;UTF-8&quot;)
+    content_article = file_article.read()
+    soup_article = BeautifulSoup(content_article, &quot;html.parser&quot;)
+    file_article.close()
+
+    # タイトル
+    title_article = soup_article.select(&quot;h1#title&quot;)[0].get_text()
+    content_article = re.sub(&#039;&lt;meta property=&quot;og:title&quot; content=&quot;.*&quot;&gt;&#039;, f&#039;&lt;meta property=&quot;og:title&quot; content=&quot;{title_article}&quot;&gt;&#039;, content_article)
+
+    # URL
+    url_article = f&quot;https://lev635.github.io/blog/article/{dirname}&quot;
+    content_article = re.sub(&#039;&lt;meta property=&quot;og:url&quot; content=&quot;.*&quot;&gt;&#039;, f&#039;&lt;meta property=&quot;og:url&quot; content=&quot;{url_article}&quot;&gt;&#039;, content_article)
+
+    # 概要
+    about_article = soup_article.select(&quot;p#about&quot;)[0].get_text(strip=True)
+    content_article = re.sub(&#039;&lt;meta property=&quot;og:description&quot; content=&quot;.*&quot;&gt;&#039;, f&#039;&lt;meta property=&quot;og:description&quot; content=&quot;{about_article}&quot;&gt;&#039;, content_article)
+
+
+    file_article_write = open(f&quot;article/{dirname}/index.html&quot;, &quot;w&quot;, encoding=&quot;UTF-8&quot;)
+    file_article_write.write(content_article)
+    file_article_write.close()
+</code></pre>
+    <p>
+        CSS セレクターから要素を抽出する。既に OGP が設定されていても同様に編集できるように正規表現を用いて書き換えている。
+    </p>
+    <h2>参考文献</h2>
+    <ul>
+        <li><a href="https://kondou.com/BS4/">Beautiful Soup 公式ドキュメント(日本語)</a></li>
+    </ul>
+    </article>
+    <div id="footer"></div>
+</body>
+
+
+<script src="../js/highlight.min.js"></script>
+<script src="../js/script.js"></script>
+<script src="js/script.js"></script>
+
+</html>

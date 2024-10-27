@@ -12,14 +12,14 @@
     <link rel="stylesheet" type=text/css href="../css/style.css" />
     <link rel="stylesheet" type=text/css href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/vs2015.css">
-    <title>ゆかりの部屋</title>
+    <title>記事一覧ページの作成 - ゆかりの部屋</title>
 </head>
 
 
 <body>
     <div id="header"></div>
     <article>
-        <h1 class="title">記事一覧ページの作成</h1>
+        <h1 id="title">記事一覧ページの作成</h1>
         <time datetime= 2024-10-18 id="upload">2024-10-18</time>
         <hr>
         <h2>概要</h2>
@@ -60,7 +60,7 @@ blog
     └─js
         </code></pre>
         <p>
-            <span class="url">artile</span>以下に各記事が格納されている。この構造を解析して自動的に記事一覧を表示させようとしたが、これは不可能だった。
+            <code>artile</code>以下に各記事が格納されている。この構造を解析して自動的に記事一覧を表示させようとしたが、これは不可能だった。
             Javascriptによるファイルの操作はGithub Pagesのような静的サイトでは出来ないらしい。
         </p>
         <h3 class="enum">直書き</h3>
@@ -97,9 +97,8 @@ file.write(&quot;&lt;/ul&gt;&quot;)
 file.close()
         </code></pre>
         <p>
-            <span class="url">article</span>以下を検索する。最新の記事が上に表示されて欲しいので順序を入れ替える。
-            記事のタイトルは<span class="url">&lt;h1 class=&quot;title&quot;&gt;</span>と<span
-                class="url">&lt;/h1&gt;</span>に挟まれているため、そこから抽出する。
+            <code>article</code>以下を検索する。最新の記事が上に表示されて欲しいので順序を入れ替える。
+            記事のタイトルは<code>&lt;h1 class=&quot;title&quot;&gt;</code>と<code>&lt;/h1&gt;</code>に挟まれているため、そこから抽出する。
             記事のURLはディレクトリの名前から直接得られる。
         </p>
         <p>
