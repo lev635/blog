@@ -1,0 +1,33 @@
+---
+import type { MarkdownInstance } from "astro";
+import ArticleCard from "./ArticleCard.astro";
+
+export interface Props {
+  articles: MarkdownInstance<Record<string, any>>[];
+  limit?: number;
+}
+const { articles, limit } = Astro.props;
+
+const sortedArticles = articles
+  .sort((a, b) => new Date(a.frontmatter.date).getTime() - new Date(b.frontmatter.date).getTime())
+  .slice(0, limit ?? articles.length);
+---
+
+<div>
+  {
+    sortedArticles.map((article) => (
+      <ArticleCard
+        url={article.url ?? ""}
+        title={article.frontmatter.title}
+        date={article.frontmatter.date}
+        lastModified={article.frontmatter.lastModified}
+      />
+    ))
+  }
+</div>
+<style>
+  div {
+    display: grid;
+    gap: 2rem;
+  }
+</style>

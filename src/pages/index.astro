@@ -1,0 +1,20 @@
+---
+import type { MarkdownInstance } from "astro";
+
+import Head from "../components/Head.astro";
+import Navigation from "../components/Navigation.astro";
+import ArticleList from "../components/ArticleList.astro";
+import Footer from "../components/Footer.astro";
+import "/src/styles/global.css";
+
+const articleFiles = import.meta.glob("../pages/article/*.md", { eager: true} );
+const articles = Object.values(articleFiles) as MarkdownInstance<Record<string, any>>[];
+---
+
+<Head title="ゆかり"/>
+<Navigation />
+<article>
+  <h1>新着記事</h1>
+  <ArticleList articles={articles} limit={3} />
+</article>
+<Footer />

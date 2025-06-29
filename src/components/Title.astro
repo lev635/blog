@@ -1,0 +1,28 @@
+---
+export interface Props {
+  title: string;
+  date: string;
+  lastModified: string;
+}
+
+const { title, date, lastModified } = Astro.props;
+---
+
+<div>
+  <span class="title">{title}</span>
+  <span class="date">公開日: {date}</span>
+  <span class="date">最終更新: {lastModified}</span>
+</div>
+
+<style>
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  span.title {
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+</style>

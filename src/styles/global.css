@@ -1,0 +1,87 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: #e6e8f2;
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 80ch;
+  padding: 1rem;
+  line-height: 1.5;
+  color: #333333;
+}
+
+article {
+  padding: 0 1rem;
+}
+
+article>p>img {
+  max-width: 80%;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+}
+
+article>h1 {
+  font-size: 2rem;
+}
+
+article>h1::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: #333333;
+  margin-bottom: 0.5rem;
+}
+
+pre {
+  background: #2d3748;
+  border-radius: 8px;
+  padding: 16px;
+  overflow-x: auto;
+  height: auto;
+  margin: 1rem auto;
+}
+
+code {
+  font-family: "Consolas", "Monaco", "Menlo", "Ubuntu Mono", "Courier New",
+    "Lucida Console", monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #e2e8f0;
+}
+
+p code,
+li code {
+  background: #e8f4fd;
+  color: #2980b9;
+  padding: 2px 6px;
+  border-radius: 5px;
+  font-size: 0.9em;
+}
+
+body>section {
+  border-top: 1px solid #333333;
+}
+
+a {
+  color: #333333;
+}
+
+a:hover {
+  color: #000000;
+}
+
+a[data-footnote-ref] {
+  font-weight: 500;
+}
+
+a[data-footnote-ref]::before {
+  content: "*";
+}
