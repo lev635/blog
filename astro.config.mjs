@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-
+import { exampleRemarkPlugin } from './example-remark-plugin.mjs';
 import react from "@astrojs/react";
 
 
@@ -13,6 +13,7 @@ export default defineConfig({
     remarkRehype: {
       footnoteLabel: "脚注"
     },
+    remarkPlugins: [exampleRemarkPlugin],
   },
 
   integrations: [react()],
