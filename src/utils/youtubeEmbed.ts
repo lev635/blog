@@ -19,20 +19,7 @@ function getStartSeconds(query: string | undefined): number | undefined {
 
 export default function rehypeYoutubeEmbed() {
   return (tree: Root) => {
-    visit(tree, 'element', (node, index, parent) => {
-      if (node.tagName !== 'a') return;
-      const href = node.properties.href;
-      if (typeof href !== 'string') return;
-
-      if (
-        !node.children ||
-        node.children.length !== 1 ||
-        node.children[0].type !== 'text' ||
-        node.children[0].value !== href
-      ) {
-        return;
-      }
-
+    traverseAndReplace(tree, 'a', (node, href) => {
       const youtubeMatch = youtubeRegex.exec(href);
       if (youtubeMatch) {
         const videoId = youtubeMatch[1];
@@ -42,7 +29,7 @@ export default function rehypeYoutubeEmbed() {
           start !== undefined
             ? `https://www.youtube.com/embed/${videoId}?start=${start}`
             : `https://www.youtube.com/embed/${videoId}`;
-        const iframe: ElementContent = {
+        return {
           type: 'element',
           tagName: 'iframe',
           properties: {
@@ -58,11 +45,8 @@ export default function rehypeYoutubeEmbed() {
           },
           children: [],
         };
-        if (parent && typeof index === 'number') {
-          parent.children.splice(index, 1, iframe);
-        }
-        return;
       }
+      return null;
     });
   };
 }
