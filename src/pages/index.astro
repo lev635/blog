@@ -16,6 +16,6 @@ const sortedarticles = articles.sort((a, b) => new Date(b.frontmatter.date).getT
 <Navigation />
 <article>
   <h1>新着記事</h1>
-  <ArticleList articles={sortedarticles.slice(3)} client:load/>
+  <ArticleList articles={sortedarticles.slice(0, 3)} client:load/>
 </article>
 <Footer />
