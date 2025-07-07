@@ -12,6 +12,6 @@ const articles = await Astro.glob("../pages/article/*.md");
 <Navigation />
 <article>
   <h1 class="font-semibold">記事一覧</h1>
-  <ArticleListReact articles={articles} />
+  <ArticleListReact articles={articles} client:load />
 </article>
 <Footer />
