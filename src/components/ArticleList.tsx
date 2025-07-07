@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { MarkdownInstance } from "astro";
-import ArticleCard from "./ArticleCardReact";
+import ArticleCard from "./ArticleCard";
 
 export interface Props {
   articles: MarkdownInstance<Record<string, any>>[];

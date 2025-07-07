@@ -2,7 +2,7 @@
 import Head from "../components/Head.astro";
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
-import ArticleListReact from "../components/ArticleListReact";
+import ArticleList from "../components/ArticleList";
 import '../styles/tailwind.css';
 
 const articles = await Astro.glob("../pages/article/*.md");
@@ -12,6 +12,6 @@ const articles = await Astro.glob("../pages/article/*.md");
 <Navigation />
 <article>
   <h1 class="font-semibold">記事一覧</h1>
-  <ArticleListReact articles={articles} client:load />
+  <ArticleList articles={articles} client:load />
 </article>
 <Footer />

@@ -3,7 +3,7 @@ import type { MarkdownInstance } from "astro";
 
 import Head from "../components/Head.astro";
 import Navigation from "../components/Navigation.astro";
-import ArticleListReact from "../components/ArticleListReact";
+import ArticleList from "../components/ArticleList";
 import Footer from "../components/Footer.astro";
 import "/src/styles/tailwind.css";
 
@@ -15,6 +15,6 @@ const articles = Object.values(articleFiles) as MarkdownInstance<Record<string, 
 <Navigation />
 <article>
   <h1 class="font-semibold">新着記事</h1>
-  <ArticleListReact articles={articles} limit={3} />
+  <ArticleList articles={articles} limit={3} client:load/>
 </article>
 <Footer />
