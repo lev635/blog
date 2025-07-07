@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import { exampleRemarkPlugin } from './example-remark-plugin.mjs';
+import { rehypeSpotifyEmbed, rehypeYoutubeEmbed } from './src/utils';
 import react from "@astrojs/react";
 
 
@@ -13,7 +13,7 @@ export default defineConfig({
     remarkRehype: {
       footnoteLabel: "脚注"
     },
-    remarkPlugins: [exampleRemarkPlugin],
+    rehypePlugins: [rehypeSpotifyEmbed, rehypeYoutubeEmbed],
   },
 
   integrations: [react()],
