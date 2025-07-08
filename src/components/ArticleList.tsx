@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { Icon } from '@iconify/react';
+
 import type { MarkdownInstance } from "astro";
 import ArticleCard from "./ArticleCard";
-import { Icon } from '@iconify/react';
 
 export interface Props {
   articles: MarkdownInstance<Record<string, any>>[];
@@ -33,7 +34,7 @@ export default function ArticleList({ articles, displayButton }: Props) {
     });
 
   return (
-    <div>
+    <>
       {displayButton && (
         <div className="flex gap-2 mb-2 items-center justify-between">
           <div className="flex gap-2 items-center">
@@ -50,7 +51,7 @@ export default function ArticleList({ articles, displayButton }: Props) {
               onClick={() => setSortType('last')}
             >
               <div className="h-6 flex items-center">
-                最終更新日
+                最終更新
               </div>
             </button>
             <button
@@ -86,7 +87,6 @@ export default function ArticleList({ articles, displayButton }: Props) {
             </button>
           </div>
         </div>
-
       )}
       <div className="flex flex-col gap-2">
         {sortedArticles.map((article) => (
@@ -99,6 +99,6 @@ export default function ArticleList({ articles, displayButton }: Props) {
           />
         ))}
       </div>
-    </div>
+    </>
   );
 }
