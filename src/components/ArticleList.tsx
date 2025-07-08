@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { MarkdownInstance } from "astro";
 import ArticleCard from "./ArticleCard";
+import { Icon } from '@iconify/react';
 
 export interface Props {
   articles: MarkdownInstance<Record<string, any>>[];
@@ -13,8 +14,14 @@ type SortType = 'pub' | 'last';
 export default function ArticleList({ articles, displayButton }: Props) {
   const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
   const [sortType, setSortType] = useState<SortType>('pub');
+  const [searchKeyword, setSearchKeyword] = useState<string>('');
+  const [searchText, setSearchText] = useState<string>('');
 
-  const sortedArticles = [...articles]
+  const filteredArticles = searchKeyword
+    ? articles.filter((article) => article.frontmatter.title.includes(searchKeyword))
+    : articles;
+
+  const sortedArticles = [...filteredArticles]
     .sort((a, b) => {
       const aDate = sortType === 'pub'
         ? new Date(a.frontmatter.date).getTime()
@@ -23,31 +30,63 @@ export default function ArticleList({ articles, displayButton }: Props) {
         ? new Date(b.frontmatter.date).getTime()
         : new Date(b.frontmatter.lastModified).getTime();
       return sortOrder === 'desc' ? bDate - aDate : aDate - bDate;
-    })
+    });
 
   return (
     <div>
       {displayButton && (
-        <div className="flex gap-2 mb-2">
-          <button
-            className={`px-3 py-1 rounded text-sm ${sortType === 'pub' ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
-            onClick={() => setSortType('pub')}
-          >
-            発表日
-          </button>
-          <button
-            className={`px-3 py-1 rounded text-sm ${sortType === 'last' ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
-            onClick={() => setSortType('last')}
-          >
-            最終更新
-          </button>
-          <button
-            className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 text-sm"
-            onClick={() => setSortOrder((v) => (v === 'desc' ? 'asc' : 'desc'))}
-          >
-            {sortOrder === 'desc' ? "新しい順" : "古い順"}で並び替え
-          </button>
+        <div className="flex gap-2 mb-2 items-center justify-between">
+          <div className="flex gap-2 items-center">
+            <button
+              className={`px-2 py-1 rounded text-sm border border-[#333333] ${sortType === 'pub' ? 'bg-blue-500 text-white' : 'bg-[#e6e8f2] hover:bg-gray-300'}`}
+              onClick={() => setSortType('pub')}
+            >
+              <div className="h-6 flex items-center">
+                投稿日
+              </div>
+            </button>
+            <button
+              className={`px-2 py-1 rounded text-sm border border-[#333333] ${sortType === 'last' ? 'bg-blue-500 text-white' : 'bg-[#e6e8f2] hover:bg-gray-300'}`}
+              onClick={() => setSortType('last')}
+            >
+              <div className="h-6 flex items-center">
+                最終更新日
+              </div>
+            </button>
+            <button
+              className="px-1 py-1 rounded text-sm border border-[#333333] bg-[#e6e8f2] hover:bg-gray-300"
+              onClick={() => setSortOrder((v) => (v === 'desc' ? 'asc' : 'desc'))}
+            >
+              {sortOrder === 'desc' ?
+                <Icon icon="iconamoon:arrow-up-2" width="24" height="24" /> :
+                <Icon icon="iconamoon:arrow-down-2" width="24" height="24" />
+              }
+            </button>
+          </div>
+          <div className="flex gap-2 items-center">
+            <Icon icon="material-symbols:search" width="24" height="24" />
+            <input
+              type="text"
+              id="username"
+              name="username"
+              className="px-2 py-1 border border-black rounded"
+              value={searchText}
+              onChange={e => setSearchText(e.target.value)}
+              onKeyDown={e => {
+                if (e.key === 'Enter') setSearchKeyword(searchText);
+              }}
+            />
+            <button
+              className="px-2 py-1 rounded text-sm border border-[#333333] bg-[#e6e8f2] hover:bg-gray-300"
+              onClick={() => setSearchKeyword(searchText)}
+            >
+              <div className="h-6 flex items-center">
+                検索
+              </div>
+            </button>
+          </div>
         </div>
+
       )}
       <div className="flex flex-col gap-2">
         {sortedArticles.map((article) => (
