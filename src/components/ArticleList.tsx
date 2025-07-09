@@ -36,7 +36,7 @@ export default function ArticleList({ articles, displayButton }: Props) {
   return (
     <>
       {displayButton && (
-        <div className="flex gap-2 mb-2 items-center justify-between">
+        <div className="flex flex-col gap-2 mb-2 justify-between sm:flex-row">
           <div className="flex gap-2 items-center">
             <button
               className={`px-2 py-1 rounded text-sm border border-[#333333] ${sortType === 'pub' ? 'bg-blue-500 text-white' : 'bg-[#e6e8f2] hover:bg-gray-300'}`}
@@ -70,7 +70,7 @@ export default function ArticleList({ articles, displayButton }: Props) {
               type="text"
               id="username"
               name="username"
-              className="px-2 py-1 border border-black rounded"
+              className="px-2 py-1 border border-black rounded w-48"
               value={searchText}
               onChange={e => setSearchText(e.target.value)}
               onKeyDown={e => {
