@@ -16,7 +16,7 @@ export default function ArticleCardReact({ url, title, date, lastModified }: Pro
           {title}
         </a>
       </div>
-      <div className="flex flex-row gap-4 mt-3">
+      <div className="flex flex-col mt-3">
         <span>投稿日: {date}</span>
         <span>最終更新: {lastModified}</span>
       </div>
