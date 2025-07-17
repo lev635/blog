@@ -18,10 +18,14 @@ const sortedarticles = articles.sort(
 );
 ---
 
-<Head title="ゆかり" />
+<Head title="ゆかり" url="https://1ev-3.vercel.app/" />
 <Navigation />
 <article>
   <h1>新着記事</h1>
+  The current URL is: {Astro.url}
+  The current URL pathname is: {Astro.url.pathname}
+  The current URL origin is: {Astro.url.origin}
+
   <ArticleList articles={sortedarticles.slice(0, 3)} client:load />
 </article>
 <Footer />
