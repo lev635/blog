@@ -6,8 +6,7 @@ export interface Props {
 
 const { title, url } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, 'https://1ev-3.vercel.app/');
-const ogpImageURL = new URL('/ogp.png', canonicalURL);
+const image = new URL('/public/ogp.png', 'https://1ev-3.vercel.app/');
 ---
 
 <head>
@@ -19,14 +18,14 @@ const ogpImageURL = new URL('/ogp.png', canonicalURL);
   <meta property="og:type" content="website">
   <meta property="og:title" content={title}>
   <meta property="og:description" content="ゆかり">
-  <meta property="og:image" content={ogpImageURL}>
+  <meta property="og:image" content={image}>
   <meta property="og:url" content={url}>
   
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:title" content={title}>
   <meta property="twitter:description" content="ゆかり">
-  <meta property="twitter:image" content={ogpImageURL}>
+  <meta property="twitter:image" content={image}>
   
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
