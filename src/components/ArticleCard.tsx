@@ -1,11 +1,11 @@
-export interface Props {
+interface Props {
   url: string;
   title: string;
   date: string;
   lastModified: string;
 }
 
-export default function ArticleCardReact({ url, title, date, lastModified }: Props) {
+export default function ArticleCard({ url, title, date, lastModified }: Props) {
   return (
     <div className="flex flex-col border-2 border-gray-800 rounded-md p-4">
       <div>
