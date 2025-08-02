@@ -5,6 +5,7 @@ import Head from "../components/Head.astro";
 import Navigation from "../components/Navigation.astro";
 import ArticleList from "../components/ArticleList";
 import Footer from "../components/Footer.astro";
+import "/src/styles/global.css";
 import "/src/styles/tailwind.css";
 
 const articleFiles = import.meta.glob("../pages/article/*.md", { eager: true });
@@ -21,6 +22,9 @@ const sortedarticles = articles.sort(
 <Head title="ゆかり" url="https://1ev-3.vercel.app/" />
 <Navigation />
 <article>
+  <h1>概要</h1>
+  <p>私がMarkdownでブログを書きたいという願いを叶えるために作られた場所。</p>
+  <p>詳細: <a href="./readme">README</a></p>
   <h1>新着記事</h1>
   <ArticleList articles={sortedarticles.slice(0, 3)} client:load />
 </article>
