@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react';
 import type { MarkdownInstance } from "astro";
 import ArticleCard from "./ArticleCard";
 
-export interface Props {
+interface Props {
   articles: MarkdownInstance<Record<string, any>>[];
   displayButton?: boolean
 }
